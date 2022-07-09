@@ -1,6 +1,6 @@
 /*  SQL Notes  */
 
-root / sky / M...
+root / sky / M.
 
 mysql-ctl cli; /* Start the CLI  */
 
