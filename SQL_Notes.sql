@@ -27,6 +27,16 @@ SELECT * FROM <table>;         /*  View Values from Table  */
 SELECT * FROM <table> WHERE <value>=*
 SELECT * AS .... FROM <table>
 
+CONCAT (column name, anotherColumn)   /*  Combines text from ranges or strings - ' ' for space*/
+
+SELECT SUBSTRING('hello world', 3, 8)  -->  =llo worl
+SELECT SUBSTRING('Hello world', -7)  -->  =o world
+
+-->  EXAMPLE  <--
+SELECT
+  CONCAT(author_fname, ' ', author_lname) AS 'full name',
+  CONCAT(stock_quantity, ' in stock') AS quantity
+FROM books;
 
 SHOW WARNINGS;        /*  Shows Warning Values */
 
@@ -49,5 +59,12 @@ CRUD  -->  Create, Read, Update, Delete
 UPDATE <table> SET <value>=* WHERE <value>=*;    /*  Updates and replaces value  */
 
 DELETE FROM <table> WHERE <value>=*;             /*  Deletes row with given value  */
+
+SOURCE
+REPLACE 
+REVERSE          /*  Reverses a String  */
+CHAR_LENGTH()      /*  Tells # of characters in string  */
+UPPER / LOWER    /*  Changes Case  */
+
 
 VARCHAR  -  INT 
