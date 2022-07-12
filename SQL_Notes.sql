@@ -10,7 +10,7 @@ DROP DATABASE <name>;
 USE <database name>;
 SELECT database <name>;
 
-
+-->  EXAMPLE  <--
   CREATE TABLE <tablename>             /* Creating a Table */
     (
         column_name data_type,
@@ -111,6 +111,23 @@ AVG                  /*  Averages  */
 
 
 -->  DATA TYPES  <--
-VARCHAR           /*  
-CHAR              /*  Has a fixed length  */
+VARCHAR            /*    */
+CHAR               /*  Has a fixed length  */
 NUMBERS
+    INT
+    DECIMAL(# digits, # decimals)
+
+CREATE TABLE items(price DECIMAL(5,2));
+INSERT INTO items(price) VALUES(786959);    -->  = 999.99
+
+FLOAT / DOUBLE             /*  Are approximates to around 7 digits  */
+DATE / TIME / DATETIME
+CURDATE() / CURTIME()      /*  Gives Current Date / Time  */
+DATE_FORMAT()              /*  Seed Documentation for Abbreviated Codes  */
+
+  CREATE TABLE people (name VARCHAR(100), birthdate DATE, birthtime TIME, birthdt DATETIME);
+ 
+  INSERT INTO people (name, birthdate, birthtime, birthdt)
+    VALUES('Padma', '1983-11-11', '10:07:35', '1983-11-11 10:07:35');
+
+-->  Formatting Dates <--
