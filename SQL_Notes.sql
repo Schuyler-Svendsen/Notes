@@ -111,23 +111,59 @@ AVG                  /*  Averages  */
 
 
 -->  DATA TYPES  <--
-VARCHAR            /*    */
-CHAR               /*  Has a fixed length  */
+VARCHAR            /*  */
+CHAR               /*  Has a fixed length, Faster for fixed length text  */
 NUMBERS
     INT
     DECIMAL(# digits, # decimals)
-
+    FLOAT / DOUBLE           /*  Are approximates to around 7 digits  */
 CREATE TABLE items(price DECIMAL(5,2));
 INSERT INTO items(price) VALUES(786959);    -->  = 999.99
 
-FLOAT / DOUBLE             /*  Are approximates to around 7 digits  */
-DATE / TIME / DATETIME
-CURDATE() / CURTIME()      /*  Gives Current Date / Time  */
-DATE_FORMAT()              /*  Seed Documentation for Abbreviated Codes  */
+-->  Formatting Dates <-- 
+DATE / TIME / DATETIME          /*  Value for Date and Time  YYY-MM-DD HH:MM:SS */
+TIMESTAMP DEFAULT NOW()         /*  Good for timestamping creation or updates - Smaller */
+CURDATE() / CURTIME()           /*  Gives Current Date & Time  */
+DAY() / DAYNAME() / DAYOFWEEK() / DAYOFYEAR() / MONTH() / MONTHNAME() / HOUR() / MINUTE()
+DATE_FORMAT()                   /*  See Documentation for Abbreviated Codes  */
+DATEDIFF(expr1, expr2)          /*  Subtracts the two dates  */
+DATE_ADD
 
-  CREATE TABLE people (name VARCHAR(100), birthdate DATE, birthtime TIME, birthdt DATETIME);
+  CREATE TABLE people (name VARCHAR(100), 
+     birthdate DATE, birthtime TIME, birthdt DATETIME,
+     changed_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP);
  
   INSERT INTO people (name, birthdate, birthtime, birthdt)
     VALUES('Padma', '1983-11-11', '10:07:35', '1983-11-11 10:07:35');
 
--->  Formatting Dates <--
+  SELECT DAYOFWEEK(NOW());   SELECT DATE_FORMAT(NOW(), '%w');    /*  Numerical           */
+  SELECT DAYNAME(NOW());     SELECT DATE_FORMAT(NOW(), '%W');    /*  String name         */
+  SELECT DATE_FORMAT(CURDATE(), '%m/%d/%Y');                     /*  mm/dd/yyy           */
+  SELECT DATE_FORMAT(NOW(), '%M %D at %h:%i');                   /*  Month Date at Time  */
+
+
+-->  LOGICAL OPERATORS  <--
+!=                           /*  Not Equal */
+NOT LIKE                     
+> / <                        /*   Greater Than / Less Than                */
+AND / &&                     /*   Combines Cluases.  Both must be true    */ 
+OR / ||                      /*   Only 1 condition must be true           */
+BETWEEN                      /*   Select for an upper and lower range     */
+CAST()                       /*   Converts from one data type to another  */
+IN() / NOT IN()
+%                            /*   Modulo Tests if something is even       */
+CASE  WHEN  ElSE  END AS
+
+SELECT title, author_lname FROM books WHERE author_lname != 'Harris'
+  AND released_year > 2014;
+
+SELECT title, released_year FROM books
+  WHERE released_year >= 2000 AND released_year % 2 != 0;
+
+SELECT 
+    name, 
+    birthdt 
+FROM people
+WHERE 
+    birthdt BETWEEN CAST('1980-01-01' AS DATETIME)
+    AND CAST('2000-01-01' AS DATETIME);
