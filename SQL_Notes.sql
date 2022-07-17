@@ -111,7 +111,7 @@ AVG                  /*  Averages  */
 
 
 -->  DATA TYPES  <--
-VARCHAR            /*  */
+VARCHAR              
 CHAR               /*  Has a fixed length, Faster for fixed length text  */
 NUMBERS
     INT
@@ -141,6 +141,11 @@ DATE_ADD
   SELECT DATE_FORMAT(CURDATE(), '%m/%d/%Y');                     /*  mm/dd/yyy           */
   SELECT DATE_FORMAT(NOW(), '%M %D at %h:%i');                   /*  Month Date at Time  */
 
+SELECT name, birthdt 
+FROM people
+WHERE 
+    birthdt BETWEEN CAST('1980-01-01' AS DATETIME)
+    AND CAST('2000-01-01' AS DATETIME);
 
 -->  LOGICAL OPERATORS  <--
 !=                           /*  Not Equal */
@@ -150,7 +155,7 @@ AND / &&                     /*   Combines Cluases.  Both must be true    */
 OR / ||                      /*   Only 1 condition must be true           */
 BETWEEN                      /*   Select for an upper and lower range     */
 CAST()                       /*   Converts from one data type to another  */
-IN() / NOT IN()
+IN() / NOT IN()              /*   Is  or  Not is                          */
 %                            /*   Modulo Tests if something is even       */
 CASE  WHEN  ElSE  END AS
 
@@ -160,10 +165,60 @@ SELECT title, author_lname FROM books WHERE author_lname != 'Harris'
 SELECT title, released_year FROM books
   WHERE released_year >= 2000 AND released_year % 2 != 0;
 
-SELECT 
-    name, 
-    birthdt 
-FROM people
-WHERE 
-    birthdt BETWEEN CAST('1980-01-01' AS DATETIME)
-    AND CAST('2000-01-01' AS DATETIME);
+SELECT title, stock_quantity,
+    CASE 
+        WHEN stock_quantity <= 50 THEN '*'
+        WHEN stock_quantity <= 100 THEN '**'
+        ELSE '***'
+    END AS STOCK
+FROM books; 
+
+SELECT author_fname, author_lname,
+    CASE 
+        WHEN COUNT(*) = 1 THEN '1 book'
+        ELSE CONCAT(COUNT(*), ' books')
+    END AS COUNT
+FROM books 
+GROUP BY author_lname, author_fname;
+
+
+-->  RELATIONSHIPS AND JOINS <--
+FOREIGN KEY()  REFERENCES <>()                   /*  When creating tables  */
+INNER JOIN
+LEFT JOIN
+RIGHT JOIN
+IFNULL(<value>,  )                               /*  If null, repleace <value> with 2nd    */
+ON DELETE CASCADE                                /*  Rows in child table deleted w/ parent */ 
+
+  -- IMPLICIT INNER JOIN
+SELECT first_name, last_name, order_date, amount
+FROM customers, orders 
+    WHERE customers.id = orders.customer_id;
+    
+  -- EXPLICIT INNER JOINS
+SELECT * FROM customers
+JOIN orders
+    ON customers.id = orders.customer_id;
+
+  -- LEFT JOIN
+SELECT * FROM customers
+LEFT JOIN orders
+    ON customers.id = orders.customer_id;
+
+  --ON DELETE CASCADE
+
+
+
+  CREATE TABLE customers(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(100)
+  );
+  CREATE TABLE orders(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_date DATE,
+    amount DECIMAL(8,2),
+    customer_id INT,
+    FOREIGN KEY(customer_id) REFERENCES customers(id)
+  );
