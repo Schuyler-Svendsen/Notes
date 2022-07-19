@@ -112,11 +112,11 @@ AVG                  /*  Averages  */
 
 -->  DATA TYPES  <--
 VARCHAR              
-CHAR               /*  Has a fixed length, Faster for fixed length text  */
+CHAR                           /*  Has a fixed length, Faster for fixed length text  */
 NUMBERS
     INT
     DECIMAL(# digits, # decimals)
-    FLOAT / DOUBLE           /*  Are approximates to around 7 digits  */
+    FLOAT / DOUBLE                           /*  Are approximates to around 7 digits  */
 CREATE TABLE items(price DECIMAL(5,2));
 INSERT INTO items(price) VALUES(786959);    -->  = 999.99
 
@@ -128,6 +128,7 @@ DAY() / DAYNAME() / DAYOFWEEK() / DAYOFYEAR() / MONTH() / MONTHNAME() / HOUR() /
 DATE_FORMAT()                   /*  See Documentation for Abbreviated Codes  */
 DATEDIFF(expr1, expr2)          /*  Subtracts the two dates  */
 DATE_ADD
+YEAR(4)
 
   CREATE TABLE people (name VARCHAR(100), 
      birthdate DATE, birthtime TIME, birthdt DATETIME,
@@ -185,10 +186,10 @@ GROUP BY author_lname, author_fname;
 -->  RELATIONSHIPS AND JOINS <--
 FOREIGN KEY()  REFERENCES <>()                   /*  When creating tables  */
 INNER JOIN
-LEFT JOIN
-RIGHT JOIN
-IFNULL(<value>,  )                               /*  If null, repleace <value> with 2nd    */
-ON DELETE CASCADE                                /*  Rows in child table deleted w/ parent */ 
+LEFT JOIN                                      /*  Select all of table A, with matching B  */
+RIGHT JOIN                                     /*  Select all of B, along with matching A  */
+IFNULL(<value>,  )                             /*  If null, repleace <value> with 2nd      */
+ON DELETE CASCADE                              /*  Rows in child table deleted w/ parent   */ 
 
   -- IMPLICIT INNER JOIN
 SELECT first_name, last_name, order_date, amount
@@ -207,18 +208,34 @@ LEFT JOIN orders
 
   --ON DELETE CASCADE
 
+  -- EXAMPLE --
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100)
+);
+ 
+CREATE TABLE papers (
+    title VARCHAR(100),
+    grade INT,
+    student_id INT,
+    FOREIGN KEY (student_id) 
+        REFERENCES students(id)
+        ON DELETE CASCADE
+);
+
+SELECT 
+	first_name, 
+    IFNULL(AVG(grade), 0) as 'average', 
+    CASE 
+		WHEN AVG(grade) > 60 THEN 'passing' 
+        ELSE 'not passing' 
+    END AS 'passing_status' 
+FROM students 
+LEFT JOIN papers 
+	ON students.id = papers.student_id 
+GROUP BY students.id 
+ORDER BY average; 
 
 
-  CREATE TABLE customers(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    email VARCHAR(100)
-  );
-  CREATE TABLE orders(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    order_date DATE,
-    amount DECIMAL(8,2),
-    customer_id INT,
-    FOREIGN KEY(customer_id) REFERENCES customers(id)
-  );
+--->  MANY TO MANY  <---
+1:MANY                                             /*  Most Common */
