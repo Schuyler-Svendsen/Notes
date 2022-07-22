@@ -16,21 +16,22 @@ SELECT database <name>;
         column_name data_type,
         column_name data_type
     );
-  SHOW COLUMNS FROM <tablename>;       /* See the columns in a Table */
 
+CREATE TABLE <name>;
+SHOW COLUMNS FROM <tablename>;       /* See the columns in a Table */
 DROP TABLE <name>;  
 
 INSERT INTO <tablename>(column1, column2)  VALUES (value, value), (value, value);  
 
-NOT NULL                           /*  Null not allowed  */
-SELECT * FROM <table>;             /*  View Values from Table  */
+NOT NULL                                /*  Null not allowed  */
+SELECT * FROM <table>;                  /*  View Values from Table  */
 SELECT * FROM <table> WHERE <value>=*
 SELECT * AS .... FROM <table>
 
 CONCAT (column name, anotherColumn)   /*  Combines text from ranges or strings - ' ' for space*/
 
   SELECT SUBSTRING('hello world', 3, 8)  -->  =llo worl
-  SELECT SUBSTRING('Hello world', -7)  -->  =o world
+  SELECT SUBSTRING('Hello world', -7)    -->  =o world
 
 
 -->  EXAMPLE  <--
@@ -112,7 +113,7 @@ AVG                  /*  Averages  */
 
 -->  DATA TYPES  <--
 VARCHAR              
-CHAR                           /*  Has a fixed length, Faster for fixed length text  */
+CHAR                            /*  Has a fixed length, Faster for fixed length text  */
 NUMBERS
     INT
     DECIMAL(# digits, # decimals)
@@ -121,12 +122,12 @@ CREATE TABLE items(price DECIMAL(5,2));
 INSERT INTO items(price) VALUES(786959);    -->  = 999.99
 
 -->  Formatting Dates <-- 
-DATE / TIME / DATETIME          /*  Value for Date and Time  YYY-MM-DD HH:MM:SS */
+DATE / TIME / DATETIME          /*  Value for Date and Time  YYY-MM-DD HH:MM:SS         */
 TIMESTAMP DEFAULT NOW()         /*  Good for timestamping creation or updates - Smaller */
-CURDATE() / CURTIME()           /*  Gives Current Date & Time  */
+CURDATE() / CURTIME()           /*  Gives Current Date & Time                           */
 DAY() / DAYNAME() / DAYOFWEEK() / DAYOFYEAR() / MONTH() / MONTHNAME() / HOUR() / MINUTE()
-DATE_FORMAT()                   /*  See Documentation for Abbreviated Codes  */
-DATEDIFF(expr1, expr2)          /*  Subtracts the two dates  */
+DATE_FORMAT()                   /*  See Documentation for Abbreviated Codes             */
+DATEDIFF(expr1, expr2)          /*  Subtracts the two dates                             */
 DATE_ADD
 YEAR(4)
 
@@ -184,7 +185,7 @@ GROUP BY author_lname, author_fname;
 
 
 -->  RELATIONSHIPS AND JOINS <--
-FOREIGN KEY()  REFERENCES <>()                   /*  When creating tables  */
+FOREIGN KEY()  REFERENCES <>()                 /*   When creating tables   */
 INNER JOIN
 LEFT JOIN                                      /*  Select all of table A, with matching B  */
 RIGHT JOIN                                     /*  Select all of B, along with matching A  */
@@ -239,3 +240,13 @@ ORDER BY average;
 
 --->  MANY TO MANY  <---
 1:MANY                                             /*  Most Common */
+
+Select 
+	title, 
+  rating, 
+  CONCAT(first_name, ' ', last_name) AS reviewer 
+FROM reviewers 
+INNER JOIN reviews 
+	ON reviewers.id = reviews.reviewer_id 
+INNER JOIN series 
+	on series.id = reviews.series_id;
