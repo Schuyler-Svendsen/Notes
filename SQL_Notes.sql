@@ -255,3 +255,22 @@ INNER JOIN reviews
 	ON reviewers.id = reviews.reviewer_id 
 INNER JOIN series 
 	on series.id = reviews.series_id;
+
+
+
+
+  -->  Bash Commands  <--
+
+  pwd               /*   Print Current Working Directory   */
+  cd                /*   Change Directory                  */
+  ls                /*   List Files of Subdirectory        */
+  mkdir             /*   Create a New Directory            */
+  rm                /*   Delete a File                     */
+  rm -r             /*   Delete a Directory                */
+  cp                /*   Copy a File                       */
+  cp -r             /*   Copy a Directory and Contents     */
+  touch             /*   Create a File                     */
+
+  node <app.js>
+  npm init
+  npm install <directory>
