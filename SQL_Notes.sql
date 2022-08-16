@@ -120,7 +120,7 @@ AVG                  /*  Averages  */
 VARCHAR              
 CHAR                            /*  Has a fixed length, Faster for fixed length text  */
 NUMBERS
-    INT
+    INT                                      /*  Integers  */
     DECIMAL(# digits, # decimals)
     FLOAT / DOUBLE                           /*  Are approximates to around 7 digits  */
 CREATE TABLE items(price DECIMAL(5,2));
@@ -257,6 +257,23 @@ INNER JOIN series
 	on series.id = reviews.series_id;
 
 
+-->  TRIGGERS  <--
+DELIMITER $$
+
+CREATE TRIGGER trigger_name
+  trigger_time trigger_event ON table_name FOR EACH ROW 
+  BEGIN
+  ...
+  END;
+$$
+
+DELIMITER ;
+
+DROP TRIGGER <trigger_name>          /*  Drop Trigger               */
+SHOW TRIGGERS [FROM db_name]         /*  Lists triggers for tables  */
+
+  -->  EXAMPLE  <--
+   
 
 
   -->  Bash Commands  <--
@@ -271,6 +288,6 @@ INNER JOIN series
   cp -r             /*   Copy a Directory and Contents     */
   touch             /*   Create a File                     */
 
-  node <app.js>
-  npm init
-  npm install <directory>
+  node <app.js>               /*   Runs app.js                   */
+  npm init                    /*   Creates JSON File             */
+  npm install <directory>     /*   Downloads specified framework */
