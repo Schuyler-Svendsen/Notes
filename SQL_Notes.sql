@@ -32,6 +32,7 @@ SELECT * FROM <table>;                  /*  View Values from Table  */
 SELECT * FROM <table> WHERE <value>=*
 SELECT * AS .... FROM <table>
 
+SUBSTRING
 CONCAT (column name, anotherColumn)   /*  Combines text from ranges or strings - ' ' for space*/
 
   SELECT SUBSTRING('hello world', 3, 8)  -->  =llo worl
@@ -68,6 +69,7 @@ UPDATE <table> SET <value>=* WHERE <value>=*;    /*  Updates and replaces value 
 DELETE FROM <table> WHERE <value>=*;             /*  Deletes row with given value  */
 
 --> STRING FUNCTIONS <--
+SUBSTRING
 SOURCE
 REPLACE 
 REVERSE                /*   Reverses a String  */
@@ -94,9 +96,9 @@ SELECT title FROM books WHERE title LIKE '%\_%'  -->  Where there is 1 percent s
 
 --> AGGREGATE FUNCTIONS  <--
 COUNT
-DISTINCT
-GROUP BY             /*  Good for counting averages  */
-MIN / MAX            /*  Finds minimum or maximum in table */
+DISTINCT             /*  Returns differnt values. Removes Doubles */ 
+GROUP BY             /*  Good for counting averages               */
+MIN / MAX            /*  Finds minimum or maximum in table        */
 SUM
 AVG                  /*  Averages  */
 
@@ -156,6 +158,7 @@ WHERE
 
 -->  LOGICAL OPERATORS  <--
 !=                           /*  Not Equal */
+LIKE
 NOT LIKE                     
 > / <                        /*   Greater Than / Less Than                */
 AND / &&                     /*   Combines Cluases.  Both must be true    */ 
