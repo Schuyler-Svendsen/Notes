@@ -81,7 +81,7 @@ DISTINCT               /*   Selects only unique values with no duplicates */
 ORDER BY <value>       /*   Orders columns by <value>  */
     DESC               /*   Ascending and Descending   */
     ASC
-LIMIT
+LIMIT                  /*  Limits the number of rows   */
 WHERE * LIKE  '%da%'   /*  Searches for anywhere * has the phrase 'da'  */
 HAVING <condition>     /*  Filters which group results appear.  Where cannot be used with aggregate functions */
 
@@ -169,6 +169,7 @@ IN() / NOT IN()              /*   Is  or  Not is                          */
 %                            /*   Modulo Tests if something is even       */
 CASE  WHEN  ElSE  END AS
 
+<-- EXAMPLES  -->
 SELECT title, author_lname FROM books WHERE author_lname != 'Harris'
   AND released_year > 2014;
 
@@ -199,6 +200,7 @@ LEFT JOIN                                      /*  Select all of table A, with m
 RIGHT JOIN                                     /*  Select all of B, along with matching A  */
 IFNULL(<value>,  )                             /*  If null, repleace <value> with 2nd      */
 ON DELETE CASCADE                              /*  Rows in child table deleted w/ parent   */ 
+
 
   -- IMPLICIT INNER JOIN
 SELECT first_name, last_name, order_date, amount
