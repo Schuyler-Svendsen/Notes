@@ -1,0 +1,20 @@
+git init      // Initializes a new Git repository
+git add <files>        // adds files to the staging area
+git status        // used to check the state of the staging area
+git log         // used to view the entire commit history
+git commit -m   // used to commit files (locally) on the repository
+git clone       // used to download existing code from a remote repository
+git branch      // used to list all the local branches on the machine
+git merge <branch-name>     //Merges the provided branch with working branch
+git branch <branch-name>     //used to create a new branch locally
+git branch -d <branch-name>    // used to delete a branch
+git branch -m <branch-name>    // used to rename the current working branch
+git checkout <branch-name>     // used to switch from the current branch to another one.
+git push <remote> <branch-name>    // used to save all commits to the remote repository
+git checkout -b <branch-name>     // used to save all commits to the remote repository.
+git pull <remote>     // used to pull down all the updates from the remote repository.
+git rm <file-name>    // used to remove a file from the working directory.
+git stash    // used to temporarily remove uncommited changes
+git reset    // undo the changes to the local files, and restore to the last commit
+git diff     // displays the difference between files in two commits or
+               between a commit and your current repository
